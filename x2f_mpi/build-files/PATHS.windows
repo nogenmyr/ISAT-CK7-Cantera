@@ -1,0 +1,18 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:   Mon Jan 31 2011 17:05:34 -0400 by Steve Lantz
+
+# This file provides paths to MPI and INTEL MKL libraries on windows (CATS)
+
+# mpi.f90 source file used on CATS, name and path
+MPI_FILE = mpi.f90
+MPI_PATH = "C:\Program Files\Microsoft HPC Pack 2008 R2\Inc"
+
+# MPI include directory
+MPI_INC = "C:\Program Files\Microsoft HPC Pack 2008 R2\Inc"
+
+# set MPI_OBJ
+MPI_OBJ=$(MPI_FILE:.f90=.obj)
+
+# set MKL and MPI LIB PATHS
+MKL_LIBS_PATH  = "C:\Program Files (x86)\Intel\Compiler\11.1\051\mkl\em64t\lib"
+MPI_LIBS_PATH  = "C:\Program Files\Microsoft HPC Pack 2008 R2\Lib\amd64"

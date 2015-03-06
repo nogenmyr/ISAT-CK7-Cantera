@@ -1,0 +1,23 @@
+  
+=====  ISAT-CK Version: 7.0        initialization starting  ====== 
+  
+Date (MM/DD/YEAR): 11/29/2012 Time: 15:43:31.
+  
+ modeci =            2
+  
+CI arrays to be allocated with: nc=   1, nfull=   3, nstr=   6
+  
+ cinit2: CI initialized for modeci=           2
+  
+ f             0.0000E+00   2.0000E-01   4.0000E-01   6.0000E-01   8.0000E-01   1.0000E+00
+ density       1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00
+ pressure      1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00
+ temperature   3.0000E+02   3.0000E+02   3.0000E+02   3.0000E+02   3.0000E+02   3.0000E+02
+  
+ full representation
+  
+  1  H2                 1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00   1.0000E+00
+  2  O2                 0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+  3  H2O                0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+  
+ ======  ISAT-CK initialization completed  ====== 

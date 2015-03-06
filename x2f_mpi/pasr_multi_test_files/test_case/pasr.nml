@@ -1,0 +1,11 @@
+&pasrnml
+!! Note that there are 3e4 queries per residence time.  34res=10^6 queries
+!! anres = 34.d6     ! residence time
+!! anres = 500d-1 !!340d-1
+!! anres = 2.d-1
+!! screen =.false.  !  o/p to screen (true) or file (false)
+anres = 1
+ng_pasr = 32
+n0 = 5000
+rstr = .false.
+/

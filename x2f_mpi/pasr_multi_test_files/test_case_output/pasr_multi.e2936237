@@ -1,0 +1,96 @@
+ Starting process: iproc, nproc =            6          32
+ Starting process: iproc, nproc =           14          32
+ Starting process: iproc, nproc =            4          32
+ Starting process: iproc, nproc =            9          32
+ Starting process: iproc, nproc =            7          32
+ Starting process: iproc, nproc =           10          32
+ Starting process: iproc, nproc =            5          32
+ Starting process: iproc, nproc =           15          32
+ Starting process: iproc, nproc =           11          32
+ Starting process: iproc, nproc =            8          32
+ Starting process: iproc, nproc =           13          32
+ Starting process: iproc, nproc =           12          32
+ Starting process: iproc, nproc =            0          32
+ Starting process: iproc, nproc =            2          32
+ Starting process: iproc, nproc =            1          32
+ Starting process: iproc, nproc =            3          32
+ Starting process: iproc, nproc =           16          32
+ Starting process: iproc, nproc =           27          32
+ Starting process: iproc, nproc =           30          32
+ Starting process: iproc, nproc =           25          32
+ Starting process: iproc, nproc =           29          32
+ Starting process: iproc, nproc =           18          32
+ Starting process: iproc, nproc =           26          32
+ Starting process: iproc, nproc =           17          32
+ Starting process: iproc, nproc =           31          32
+ Starting process: iproc, nproc =           28          32
+ Starting process: iproc, nproc =           24          32
+ Starting process: iproc, nproc =           19          32
+ Starting process: iproc, nproc =           21          32
+ Starting process: iproc, nproc =           23          32
+ Starting process: iproc, nproc =           20          32
+ Starting process: iproc, nproc =           22          32
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+  0.0000000E+00  9.9999998E-03
+ pasr_multi: stopped, iproc, t, istep =            5  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           25  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           22  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           31  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           18  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           23  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           24  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           27  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           20  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           16  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           30  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           19  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           17  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           26  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           29  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           21  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           28  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           10  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           15  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            2  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            7  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            4  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           14  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            3  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            0  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            8  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            9  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            1  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =            6  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           11  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           12  9.9600032E-03         249
+ pasr_multi: stopped, iproc, t, istep =           13  9.9600032E-03         249

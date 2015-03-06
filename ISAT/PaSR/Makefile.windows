@@ -1,0 +1,24 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu, 12 Nov 2009 16:30:00 -0500
+
+include ../build-files/vars.windows
+
+ISATCK_PATH = ..\isat-ck
+ICEPIC_PATH = ..\ice-pic
+ISATAB_PATH = ..\isatab_ser
+IFLAGS = /I$(ISATAB_PATH) /I$(ISATCK_PATH) /I$(ICEPIC_PATH)
+LIBS_PATH = ..\lib
+LDFLAGS= /LIBPATH:$(LIBS_PATH) isat7_ser.lib lapack.lib
+NAME = PaSR.exe
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS = $(FILES:.f=.obj)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(NAME)
+
+include ../build-files/build-targets.windows

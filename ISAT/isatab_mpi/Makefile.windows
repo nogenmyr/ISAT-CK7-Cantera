@@ -1,0 +1,33 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu, 12 Nov 2009 16:42:16 -0500
+
+include ../build-files/vars.windows
+
+SELL_LIB_PATH=..\sell_lib
+IFLAGS = /I$(SELL_LIB_PATH)
+LIB_NAME = isatab_mpi
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+include ../build-files/MPI.windows
+
+OBJS = $(FILES:.f90=.obj) $(MPI_OBJ)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) BUILD-SELL $(CREATE_LIBS)
+
+BUILD-SELL:
+	(cd $(SELL_LIB_PATH) && $(MAKE))
+	$(TOUCH) $@
+
+include ../build-files/build-targets.windows
+
+clean::
+	$(RM) BUILD-SELL
+
+# ---------- DEPENDENCIES -----------------
+
+include DEPENDS.mk
+

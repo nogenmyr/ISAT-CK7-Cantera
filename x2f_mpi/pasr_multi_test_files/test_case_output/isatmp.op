@@ -1,0 +1,4 @@
+adaptive init  16   2   1
+nolocal     0
+distribution strategies:     4     4     1
+number of attempts     :    16     1     1

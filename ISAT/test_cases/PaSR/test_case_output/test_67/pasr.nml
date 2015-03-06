@@ -1,0 +1,10 @@
+&pasrnml
+!! This version for Ethylene (constant p and dt)
+!! Note that there are 3e4 queries per residence time.
+anres = 1.d0
+tres = 10.e-3
+tmix = 1.e-3
+tpair = 1.e-3
+full_op = .false.
+screen = .false.
+/

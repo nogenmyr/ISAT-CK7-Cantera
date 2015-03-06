@@ -1,0 +1,115 @@
+An ellipsoid E in R^n is given by:
+
+E = { x : | G^T * ( x - c ) <= 1 }, 
+
+where c (n x 1) is the center of the ellipsoid and
+G (n x n ) is a lower triangular matrix.  
+The n*(n+1)/2 non-zero elements of G are stored packed by columns
+in the array gg.
+
+Alternatively, in place of G, the ellipsoid can be represented in terms of
+A = G * G^T,  or  B where B * B^T = G * G^T,  or (U, S) where G = U * S * V^T
+is the SVD of G.
+
+The routines are in five groups depending on the input
+geometry.  Routines ell_* use packed format for G; routines ellu_*
+use unpacked, lower triangular matrices for G.
+
+Conversion between representations:-------------------------------------------
+
+ell_bbt2chol( n, B, g )      - given B, compute G (in packed format)
+ellu_bbt2chol( n, B, G )     - given B, compute G (in full format)
+ell_bbt2eig( n, B,  U, lam ) - given B, compute (U, S) 
+ell_chol2eig( n, g, u, lam ) - given G, compute (U, S) (G in packed format)
+ellu_chol2eig( n, g, u, lam )- given G, compute (U, S) (G in full format)
+ell_eig2chol( n, u, lam, g ) - given (U, S), compute G (in packed format)
+ell_full2eig( n, A, U, lam ) - given A, compute (U, S) 
+ell_full2low( n, A, L )      - given A, return in L the lower triangle of A (in packed format)
+ell_low2chol( n, l, g )      - given L (the lower triangle of A), compute G (in packed format)
+
+Single ellipsoid routines:---------------------------------------------------
+
+ell_rad_lower( n, gg, r ) - determines the radius of the inscribed ball,
+                            i.e., the largest ball contained in E
+							
+ell_rad_upper(  n, gg, r ) - determines the radius of the covering ball,
+ellu_rad_upper( n,  g, r )   i.e., the smallest ball that covers E
+
+ell_radii( n, gg, r_in, r_out ) - determine the radii of the inscribed and
+ellu_radii( n, g, r_in, r_out )   circumscribed balls
+
+ell_chol_det( n, g, det ) - determines the determinant of G, which is the inverse
+                            of the content (volume) of E
+							
+Single ellipsoid and point routines:-----------------------------------------
+
+ell_pt_in( n, c, gg, p, in ) - determines if the point p is in the ellipsoid E
+
+ell_pt_dist( n, c, gg, p, s ) - determine the relative distance to the boundary of E
+
+ell_pt_near_far(  knf, n, c, gg, p, x ) - determines the point x in E which is nearest
+ellu_pt_near_far( knf, n, c, g,  p, x )   or furthest to the point p
+
+ell_pt_modify( n, c, gg, p ) - modifies (shrinks or grows) the ellipsoid E so that the 
+                            point p is on the boundary of the modified ellipsoid, Ev 
+
+ell_pt_shrink( n, c, gg, p, k_ell, info ) - shrinks the ellipsoid E based on the 
+                            point p.  For k_ell=1, 2, 3 the modified ellipsoid is Ev, En, Ec.
+
+ell_pt_hyper( n, c, gg, p, xh, v )  - determine the hyper-plane which is the perpendicular
+                                      bisector of the line c-p in the transformed space in
+				      which E is the unit ball
+
+Single ellipsoid and set of points routines:-----------------------------------------
+									  
+ell_pts_uncover( n, c, r_max, theta, npts, p, gg, phi, r_min )
+                             given npts points p, determine an ellipsoid E, centered at c,
+                             which does not cover any of the points
+
+Ellipsoid and affine space routines:---------------------------------------------------
+
+ell_line_proj( n, c, gg, x0, v, smin, smax ) - given an ellipsoid E and the line L,
+                                               x = x0 + v * s, determine the line segment
+  					       (smin, smax)  which is the
+					       orthogonal projection of E onto L
+
+ell_aff_pr( n, c, gg, m, d, T, cp, ggp ) - given an ellipsoid E and an affine space A, 
+                                           determine the orthogonal projection of E onto A.
+					   This is an ellipsoid in A given by cp and ggp.
+
+Pair of ellipsoid routines:---------------------------------------------------
+
+ell_pair_shrink( n, gg1, gg2, n_shrink ) - Given a pair of concentric ellipsoids
+                                           E1 and E2, shrink E2 (if necessary) so 
+					   that it is contained in E1.
+
+ell_pair_separate( n, c1, gg1, c2, gg2, qual, max_it, xh, v, intersect )
+                            - determine if two ellipsoids, E1 and E2, intersect; 
+                              and, if they do not, determine a separating hyperplane
+
+ell_pair_cover_query( n, c1, gg1, c2, gg2, rmax ) - determine if ellipsoid E1 covers E2.
+
+ell_pair_cover( algorithm, n, c1, gg1, c2, gg2, c, gg ) - determine an ellipsoid which
+                                          covers the two given ellipsoids, E1 and E2,
+					  using one of the following algorithms:
+
+ell_pair_cover_sph( n, c1, gg1, c2, gg2, c, gg ) - spheroid   (algorithm=1)
+ell_pair_cover_cv(  n, c1, gg1, c2, gg2, c, gg ) - covariance (algorithm=2)
+ell_pair_cover_it(  n, c1, gg1, c2, gg2, c, gg ) - iterative  (algorithm=3)
+
+
+Notes:--------------------------------------------------------------------------
+
+1/ dgesvd can be replaced by the newer divide-and-conquer routines
+
+2/ in ell_rad_upper, the eigenvalue approach used in ell_rad_lower could also be
+   used. 
+
+3/ ell_pair_cover is not optimal, in the sense that the covering ellipsoid E is not
+   of minimal volume.
+
+4/ ell_pair_separate is not optimal, in the sense that the it does not identify the
+   closest points on E1 and E2.  Iterating using ell_pt_near_far can be used for this
+   purpose.  A routine written for the purpose would be more efficient.
+
+5/ destsv.f and dgqt.f are from Minpack-2.  See CopyrightMINPACK.txt for legal notices.

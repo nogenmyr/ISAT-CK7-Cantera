@@ -1,0 +1,107 @@
+# Makefile to build all the projects on Windows
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Fri, 16 Jul 2010 15:23:27 -0400
+
+PROJECTS=ADIFOR_stub CEQ canteralib cklib_ext_stub ell_lib isatab_mpi isatab_ser isat-ck isat-ck-ext rnu_lib sell_lib # removed: ice-pic 
+DEP_LIBS=adifor ct ck_ext lapack
+
+PROGRAMS=PaSR isatab_test
+# DEP_PROGRAMS=ckinterp # Not needed, refer to ck2cti
+ACTIVE=isat-ck PaSR # removed: ice-pic 
+
+ISAT_SER=ADIFOR_stub CEQ canteralib cklib_ext_stub ell_lib isatab_ser isat-ck isat-ck-ext rnu_lib sell_lib # removed: ice-pic 
+ISAT_MPI=ADIFOR_stub CEQ canteralib cklib_ext_stub ell_lib isatab_mpi isat-ck isat-ck-ext rnu_lib sell_lib # removed: ice-pic 
+
+DESTDIR=.
+
+# Set build type
+MAKE=nmake -f Makefile.windows
+
+include build-files/vars.windows
+
+all: install
+
+build: build-libs build-isat-libs build-programs
+
+build-libs:
+	for %%p in ($(PROJECTS)) do \
+	(cd %%p && $(MAKE) & cd ..)
+
+build-isat-libs: isat7_ser isat7_mpi
+
+isat7_ser:
+	@echo BUILDING ISAT7 SERIAL LIBRARY
+	for %%p in ($(ISAT_SER)) do \
+	@(xcopy /Y %%p\*.lib tmp_$@\)
+	
+	@for %%d in ($(DEP_LIBS)) do \
+	@(if exist ..\ISAT_dependencies\lib\%%d.lib @xcopy /Y ..\ISAT_dependencies\lib\%%d.lib tmp_$@ && echo Using ..\ISAT_dependencies\lib\%%d.lib)
+
+	@cd tmp_$@
+	@for %%a in (*.lib) do @(for /f %%i in ('$(AR) /list /nologo %%a') do @$(AR) /extract:%%i /nologo %%a)
+	@($(AR) /out:$@.lib *.obj)
+	@cd ..
+	@(xcopy /Y tmp_$@\$@.lib $(DESTDIR)\lib\)
+	@$(RMDIR) tmp_$@
+
+isat7_mpi:
+	@echo BUILDING ISAT7 MPI LIBRARY
+	for %%p in ($(ISAT_MPI)) do \
+	(xcopy /Y %%p\*.lib tmp_$@\)
+
+	@for %%d in ($(DEP_LIBS)) do \
+	@(if exist ..\ISAT_dependencies\lib\%%d.lib @xcopy /Y ..\ISAT_dependencies\lib\%%d.lib tmp_$@ && echo Using ..\ISAT_dependencies\lib\%%d.lib)
+
+	@cd tmp_$@
+	@for %%a in (*.lib) do @(for /f %%i in ('$(AR) /list /nologo %%a') do @$(AR) /extract:%%i /nologo %%a)
+	@($(AR) /out:$@.lib *.obj)
+	@cd ..
+	@(xcopy /Y tmp_$@\$@.lib $(DESTDIR)\lib\)
+	@$(RMDIR) tmp_$@
+
+build-programs: install-libs clean
+	for %%p in ($(PROGRAMS)) do \
+	(cd %%p && $(MAKE) & cd ..)
+
+install: build install-libs install-programs
+
+install-libs:
+	for %%p in ($(PROJECTS)) do \
+	(xcopy /Y %%p\*.lib $(DESTDIR)\lib\)
+	@echo INSTALLING ISAT DEPENDENCIES to $(DESTDIR)\lib
+	@for %%d in $(DEP_LIBS) do \
+	@(if exist ..\ISAT_dependencies\lib\%%d.lib @xcopy /Y ..\ISAT_dependencies\lib\%%d.lib $(DESTDIR)\lib)
+	@echo BUILD DONE
+	@echo THE FOLLOWING LIBS HAVE BEEN GENERATED IN $(DESTDIR)\lib
+	dir /p $(DESTDIR)\lib
+
+install-programs:
+	@echo INSTALLING PROGRAMS to $(DESTDIR)\bin
+	for %%p in ($(PROGRAMS)) do \
+	(xcopy /Y %%p\*.exe $(DESTDIR)\bin\)
+	@echo INSTALLING ISAT DEPENDENCIES to $(DESTDIR)\bin
+	for %%d in $(DEP_PROGRAMS) do \
+	@(if exist ..\ISAT_dependencies\bin\%%d.exe @xcopy /Y ..\ISAT_dependencies\bin\%%d.exe $(DESTDIR)\bin)
+	@echo INSTALLING PROGRAMS DONE
+	@echo THE FOLLOWING EXECUTABLES HAVE BEEN GENERATED IN $(DESTDIR)\bin
+	dir /p $(DESTDIR)\bin
+
+clean: clean-programs
+
+dist-clean: clean-libs clean-programs
+
+clean-libs:
+	for %%p in ($(PROJECTS)) do \
+	(cd %%p && $(MAKE) clean & cd ..)
+
+clean-programs:
+	for %%p in ($(PROGRAMS)) do \
+	(cd %%p && $(MAKE) clean & cd ..)
+
+clean-active:
+	for %%p in ($(ACTIVE)) do \
+	(cd %%p && $(MAKE) clean & cd ..)
+
+rebuild: clean build
+
+.PHONY: clean

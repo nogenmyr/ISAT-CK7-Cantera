@@ -1,0 +1,65 @@
+# Makefile to build all the projects on Windows
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Mon Jan 31 2011 17:05:34 -0400 by Steve Lantz
+
+PROJECTS=x2f_mpi x2f_mpi_isat
+#PROGRAMS=test_x2f_mpi test_x2f_mpi_isat test_sort_tools pasr_multi
+PROGRAMS=test_x2f_mpi test_sort_tools pasr_multi
+
+DESTDIR=.
+
+# Set build type
+MAKE=nmake -f Makefile.windows
+
+all: install
+
+build: build-libs build-programs
+
+build-libs:
+	for %%p in ($(PROJECTS)) do \
+	(cd %%p && $(MAKE) & cd ..)
+
+build-programs: install-libs clean
+	for %%p in ($(PROGRAMS)) do \
+	(cd %%p && $(MAKE) & cd ..)
+
+install: build install-libs install-programs
+
+install-libs:
+	for %%p in ($(PROJECTS)) do \
+	(xcopy /Y %%p\*.lib $(DESTDIR)\lib\)
+	@echo "BUILD DONE";
+	@echo "THE FOLLOWING LIBS HAVE BEEN GENERATED IN $(DESTDIR)\lib"
+	dir/p $(DESTDIR)\lib
+
+install-programs:
+	for %%p in ($(PROGRAMS)) do \
+	(xcopy /Y /I %%p\*.exe $(DESTDIR)\bin\)
+	@echo "THE FOLLOWING EXECUTABLES HAVE BEEN GENERATED IN $(DESTDIR)\bin"
+	dir/p $(DESTDIR)\bin
+
+clean: clean-programs
+
+dist-clean: clean-libs clean-programs
+
+clean-libs:
+	for %%p in ($(PROJECTS)) do \
+	(cd %%p && $(MAKE) clean & cd ..)
+
+clean-programs:
+	for %%p in ($(PROGRAMS)) do \
+	(cd %%p && $(MAKE) clean & cd ..)
+
+purge: purge-libs purge-programs
+
+purge-libs:
+	for %%p in ($(PROJECTS)) do \
+	(cd %%p && $(MAKE) purge & cd ..)
+
+purge-programs:
+	for %%p in ($(PROGRAMS)) do \
+	(cd %%p && $(MAKE) purge & cd ..)
+
+rebuild: clean build
+
+.PHONY: clean

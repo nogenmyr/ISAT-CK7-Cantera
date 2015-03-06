@@ -1,0 +1,15 @@
+ Number of species                 =      38
+ Number of streams                 =       3
+ Flow rates of streams             =  0.0500  0.8500  0.1000
+ PASR starting: number of particles=     100
+ Residence time, tres (seconds)    =   1.0000E-02
+ 04/06/2012: Prior to this date, due to a bug tres was twice the specified tres
+ Mixing time, tmix (seconds)       =   1.0000E-03
+ Pairing time, tpair (seconds)     =   1.0000E-03
+ Min. and max. time step (seconds) =   1.0000E-04   1.0000E-04
+ Number of steps                   =   1.0000E+02
+ Number of sub-steps per step      =       3
+ Number of particle-sub-steps      =   3.0000E+04
+ Maximum pressure (atm.)           =   1.0000E+00
+ Minumum pressure (atm.)           =   1.0000E+00
+ Period of pressure variation (sec)=   1.0000E-03

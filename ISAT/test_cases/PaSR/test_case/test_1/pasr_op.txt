@@ -1,0 +1,78 @@
+ Number of species                 =       1
+ Number of streams                 =       1
+ Flow rates of streams             =  1.0000
+ PASR starting: number of particles=     100
+ Residence time, tres (seconds)    =   1.0000E-02
+ 04/06/2012: Prior to this date, due to a bug tres was twice the specified tres
+ Mixing time, tmix (seconds)       =   1.0000E-03
+ Pairing time, tpair (seconds)     =   1.0000E-03
+ Min. and max. time step (seconds) =   1.0000E-04   1.0000E-04
+ Number of steps                   =   1.0000E+02
+ Number of sub-steps per step      =       3
+ Number of particle-sub-steps      =   3.0000E+04
+ Maximum pressure (atm.)           =   1.0000E+00
+ Minumum pressure (atm.)           =   1.0000E+00
+ Period of pressure variation (sec)=   1.0000E-03
+q, mu_s, sec, min, hour   6.00E+02  8.52E-01  5.11E-04  8.52E-06  1.42E-07
+q, mu_s, sec, min, hour   1.20E+03  7.88E-01  9.46E-04  1.58E-05  2.63E-07
+q, mu_s, sec, min, hour   1.80E+03  7.64E-01  1.37E-03  2.29E-05  3.82E-07
+q, mu_s, sec, min, hour   2.40E+03  6.17E-01  1.48E-03  2.47E-05  4.11E-07
+q, mu_s, sec, min, hour   3.00E+03  6.30E-01  1.89E-03  3.15E-05  5.25E-07
+q, mu_s, sec, min, hour   3.60E+03  5.54E-01  1.99E-03  3.32E-05  5.54E-07
+q, mu_s, sec, min, hour   4.20E+03  5.00E-01  2.10E-03  3.50E-05  5.83E-07
+q, mu_s, sec, min, hour   4.80E+03  1.53E+00  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   5.40E+03  1.36E+00  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   6.00E+03  1.22E+00  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   6.60E+03  1.11E+00  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   7.20E+03  1.02E+00  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   7.80E+03  9.42E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   8.40E+03  8.75E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   9.00E+03  8.16E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   9.60E+03  7.65E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.02E+04  7.20E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.08E+04  6.80E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.14E+04  6.45E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.20E+04  6.12E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.26E+04  5.83E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.32E+04  5.57E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.38E+04  5.32E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.44E+04  5.10E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.50E+04  4.90E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.56E+04  4.71E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.65E+04  4.45E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.74E+04  4.22E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.83E+04  4.02E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   1.92E+04  3.83E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.01E+04  3.66E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.10E+04  3.50E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.19E+04  3.36E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.28E+04  3.22E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.37E+04  3.10E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.46E+04  2.99E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.55E+04  2.88E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.64E+04  2.78E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.73E+04  2.69E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.82E+04  2.61E-01  7.35E-03  1.22E-04  2.04E-06
+q, mu_s, sec, min, hour   2.91E+04  4.30E-01  1.25E-02  2.08E-04  3.47E-06
+q, mu_s, sec, min, hour   3.00E+04  4.17E-01  1.25E-02  2.08E-04  3.47E-06
+ pasr: stopped, t, cpu_secs, nrec =   1.00999912E-02   1.25059998E-02          -2
+  
+MFU: fraction, index =    9.0000E-01        0
+  
+ Retrieve errors
+ Fraction    error
+   9.0000E-01   0.0000E+00
+   9.9000E-01   0.0000E+00
+   9.9900E-01   0.0000E+00
+   9.9990E-01   0.0000E+00
+   9.9999E-01   0.0000E+00
+  
+queries  =    0.0000E+00
+prim_ret =    0.0000E+00
+sec_ret  =    0.0000E+00
+grow     =    0.0000E+00
+add      =    0.0000E+00
+replace  =    0.0000E+00
+dir eval =    0.0000E+00
+
+CPU (mu s)/query =      Infinity

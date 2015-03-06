@@ -1,0 +1,31 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu, 12 Nov 2009 16:33:21 -0500
+
+include ../build-files/vars.windows
+
+RNU_LIB_PATH=..\rnu_lib
+IFLAGS = /I$(RNU_LIB_PATH)
+LIB_NAME = sell
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS=$(FILES:.f90=.obj)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) BUILD-RNU $(CREATE_LIBS)
+
+BUILD-RNU:
+	(cd $(RNU_LIB_PATH) & $(MAKE))
+	$(TOUCH) $@
+
+include ../build-files/build-targets.windows
+
+clean::
+	$(RM) BUILD-RNU
+
+# ----------- DEPENDENCIES -----------------
+
+include DEPENDS.mk

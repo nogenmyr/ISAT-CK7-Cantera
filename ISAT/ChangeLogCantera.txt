@@ -1,0 +1,42 @@
+Change log; replacing Chemkin with Cantera
+
+All subroutines in cklib_stub were made functional using Cantera.
+Names were changed from CK* to CT*, and the routine's arguments were
+adapted (basically removal of Chemkin work spaces). Then it was renamed
+to canteralib (and compiles to ctlib.a (.so))
+
+A new variable was created in module ci_dat6; type(phase_t) :: gas
+which is a Cantera gas object. The gas object can be given different
+thermodynamic states, and be used to retrieve thermodynamic quantities
+using the interfaces in cantera.f (from cantera source)
+
+All references to Chemkin's work space (iwk, rwk, cwk) have been removed.
+subroutine ck_thermo used to read in the NASA polynomal coefficients directly
+from the Chemkin work space. With Cantera, a new C++ interface routine was
+created to provide the same data. (canteraaccess.cpp)
+
+subroutine ck_corr was removed as it had a similar dependency on Chemkin.
+Cantera can correct data by itself.
+
+The subroutines in ice-pic/g_jacadf.f rely heavily on Chemkin's internal work
+arrays, and has been removed, by excluding the file in SOURCES.mk Along with
+them, the two subroutines "jacobian" and "cijac5adf" in isat-ck was commented 
+out. This means certain functionality of ice-pic and isat-ck is not available 
+currently. This also means that the programs PaSR and isatab_test does not 
+compile.
+
+During installation of Cantera, the library "libcantera_fortran.a" was 
+created. This library has to be present in ISAT_dependencies/lib, 
+typically as a symbolic link to the Cantera installation:
+
+    $ ls -l ISAT_dependencies/lib
+    lrwxrwxrwx 1 kalle kalle 35 jan 16 13:23 libcantera_fortran.a -> /usr/local/lib/libcantera_fortran.a
+
+Further, Cantera has to be compiled with the flag -fPIC. Edit the SConstruct file.
+
+Before building, edit build-files/vars.mk and set the Cantera files path
+correctly.
+
+Windows: I have not tried building this on Windows. There should probably
+be changes to the build files to do this!
+

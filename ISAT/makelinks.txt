@@ -1,0 +1,43 @@
+rm ./libadifor.so
+rm ./libisat7_ser.so
+rm ./libceq.so
+rm ./libck_ext.so
+rm ./libisatab_ser.so
+rm ./libct.so
+rm ./libck.so
+rm ./libisatck_ext.so
+rm ./libell.so
+rm ./libisatck.so
+rm ./libice_pic.so
+rm ./libisat_rnu.so
+rm ./libsell.so
+
+## Cantera version
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libadifor.so libadifor.so
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libisat7_ser.so libisat7_ser.so
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libceq.so   libceq.so     
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libck_ext.so     libck_ext.so 
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libisatab_ser.so libisatab_ser.so
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libct.so  libct.so       
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libisatck_ext.so libisatck_ext.so
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libell.so  libell.so      
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libisatck.so libisatck.so
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libice_pic.so  libice_pic.so  
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libisat_rnu.so libisat_rnu.so
+ln -s /home/kalle/work/ISAT-CK7/ISAT/lib/libsell.so libsell.so
+
+
+## Chemkin version
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libadifor.so libadifor.so
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libisat7_ser.so libisat7_ser.so
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libceq.so   libceq.so     
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libck_ext.so     libck_ext.so 
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libisatab_ser.so libisatab_ser.so
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libck.so  libck.so       
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libisatck_ext.so libisatck_ext.so
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libell.so  libell.so      
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libisatck.so libisatck.so
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libice_pic.so  libice_pic.so  
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libisat_rnu.so libisat_rnu.so
+ln -s /home/kalle/work/ISAT-CK7-CK/ISAT/lib/libsell.so libsell.so
+

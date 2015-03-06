@@ -1,0 +1,11 @@
+&isat_nml
+nml_op   = 2
+ret_frac = -1.d0
+grow_frac= -1.d0
+stomby   = -2500 !! -2500 !! -20000
+etola    = 2.d-4
+icheck   = 0
+idites   = 10000
+! grow_max = 100
+! outinc = 2
+/

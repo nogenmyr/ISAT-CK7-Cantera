@@ -1,0 +1,108 @@
+ ISATAB Version 5.1
+
+isat_table_init: initializing table for idtab=     2
+ Read from namelist file: isat_2.nml                    
+  
+ ------ Values of isatab parameters: after modification by isat_nml -----
+ &ISAT_NML
+ NML_OP  =           2,
+ IF_G    =           1,
+ IF_H    =           0,
+ PR_MRU  =           5,
+ PR_MFU  =          30,
+ RET_MIN =          10,
+ RET_MAX =          -1,
+ GROW_MIN        =           1,
+ GROW_MAX        =          -1,
+ ICH0    =         100,
+ STATS0  =           0,
+ IFULL   =           1,
+ ISTATS  =           0,
+ NO_PR   =           0,
+ NO_SR   =           0,
+ NO_GROW =           0,
+ NO_ADD  =           0,
+ NO_DEV  =           0,
+ IDITES  =           1,
+ DEFER   =           0,
+ NO_BT   =           0,
+ GROW_MODE       =           1,
+ MODE_CON        =           4,
+ MODE_EOI        =           0,
+ MODE_SHRINK     =           3,
+ DEGEN_R =          -1,
+ DEGEN_G =          -1,
+ DEGEN_S =          -1,
+ DEGEN_C =          -1,
+ ECC_ACT =           1,
+ AD_LOOK =        1000,
+ AD_USE  =         100,
+ AD_SHRINK       =           0,
+ DE_NEARBY       =           0,
+ AFF_NA  =           0,
+ AFF_LIM =          -3,
+ SR_MODE =           2,
+ GR_MODE =           2,
+ PAIR_COVER      =           2,
+ CUT_ADD =           0,
+ CUT_REM =           0,
+ CUT_UPD =           0,
+ ICHECK  =           0,
+ N_SPOOL =           0,
+ N_ADD_OP        =           0,
+ ETOLA   =  1.000000000000000E-004,
+ ETOLR   =  0.000000000000000E+000,
+ ETOLC   =  1.000000000000000E+020,
+ EOA_LIM =  0.100000000000000     ,
+ EOI_LIM =   10.0000000000000     ,
+ RET_FRAC        =  0.500000000000000     ,
+ GROW_FRAC       =   2.00000000000000     ,
+ STOMBY  =   100.000000000000     ,
+ OUTINC  =   1.02000000000000     ,
+ CHK_INC =   1.20000000000000     ,
+ CHK_FULL        =   1.20000000000000     ,
+ AFF_ADDS        =   10.0000000000000     ,
+ AFF_INC =   1.20000000000000     ,
+ AFF_THRESH      =  0.100000000000000     ,
+ AFF_RATIO       =   2.00000000000000     ,
+ AD_THETA        =  0.900000000000000     ,
+ PAIR_SEP        =  0.900000000000000     ,
+ SLOW_PROG_THRESH        =   1.00000000000000     ,
+ RET_FRAC_SLOW   =  0.500000000000000     ,
+ GROW_FRAC_SLOW  =  0.500000000000000     ,
+ ECC_FREQ        =  0.100000000000000     
+ /
+ --------------------------------------------------------------------
+
+idtab, nprocs, myrank=     2    16     6
+
+nx, nf, nh=     5     6     6
+
+Values of info(1:70) to be used:
+
+       0       1       0       5      30
+      10      -1       1      -1       0
+       0       2       0       0       0
+       0       0       0     100       0
+       1       0       0       0       0
+       0       0       1       0       0
+       0       0       0       0       1
+       4       0       3      -1      -1
+      -1      -1       1    1000     100
+       0       0       0      -3       2
+       2       2       0       0       0
+       0       0       0       0       0
+       0       0       0       0       0
+       0       0       0       0       1
+
+Values of rinfo(1:25) to be used:
+
+   1.000E-04   0.000E+00   1.000E+20   1.000E-01   1.000E+01
+   5.000E-01   2.000E+00   1.000E+02   1.020E+00   1.200E+00
+   1.200E+00   1.000E+01   1.200E+00   1.000E-01   2.000E+00
+   9.000E-01   9.000E-01   1.000E+00   5.000E-01   5.000E-01
+   1.000E-01   0.000E+00   0.000E+00   0.000E+00   0.000E+00
+
+maximum number of table entries =    39718
+cdf_err (re-)initialized with default parameters
+New affine space: n_ell, na, sig_star, sig(na:na+1) =        12        2   9.8950E-01   9.0259E-01   6.1524E-01

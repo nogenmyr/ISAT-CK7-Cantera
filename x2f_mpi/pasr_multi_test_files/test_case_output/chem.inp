@@ -1,0 +1,53 @@
+!  CH4 mechanism provided by Sanjay Correa 6/7/93
+!
+ELEMENTS
+ H   O    C   N  AR
+END
+SPECIES 
+H2O CO2 N2 O2 CH4 CO
+H  H2  OH   O  CH3  HCO  HO2  H2O2  CH2O  CH3O AR
+END
+REACTIONS
+H+O2=OH+O              1.59E+17   -0.927   16874.    !  1
+O+H2=OH+H              3.87E+04    2.70     6262.    !  2
+OH+H2=H2O+H            2.16E+08    1.51     3430.    !  3
+OH+OH=O+H2O            2.10E+08    1.40     -397.    !  4
+H+H+M=H2+M             6.40E+17   -1.0         0.    !  5
+H+OH+M=H2O+M           8.40E+21   -2.00        0.    !  6
+H+O2+M=HO2+M           7.00E+17   -0.80        0.    !  7
+HO2+H=OH+OH            1.50E+14    0.0      1004.    !  8
+HO2+H=H2+O2            2.50E+13    0.0       693.    !  9
+HO2+O=O2+OH            2.00E+13    0.0         0.    ! 10
+HO2+OH=H2O+O2          6.02E+13    0.0         0.    ! 11
+H2O2+M=OH+OH+M         1.00E+17    0.0     45411.    ! 12
+CO+OH=CO2+H            1.51E7      1.3     -758.     ! 13
+CO+O+M=CO2+M           3.01E+14    0.0      3011.    ! 14
+HCO+H=H2+CO            7.23E+13    0.0         0.    ! 15
+HCO+O=OH+CO            3.00E+13    0.0         0.    ! 16
+HCO+OH=H2O+CO          1.00E+14    0.0         0.    ! 17
+HCO+O2=HO2+CO          4.20E+12    0.0         0.    ! 18
+HCO+M=H+CO+M           1.86E+17   -1.0     16993.    ! 19
+CH2O+H=HCO+H2          1.26E+08   1.62      2175.    ! 20
+CH2O+O=HCO+OH          3.50E+13   0.0       3513.    ! 21
+CH2O+OH=HCO+H2O        7.23E+05   2.46      -970.    ! 22
+CH2O+O2=HCO+HO2        1.00E+14   0.0      39914.    ! 23
+CH2O+CH3=HCO+CH4       8.91E-13   7.40      -956.    ! 24
+CH2O+M=HCO+H+M         5.00E+16   0.0      76482.    ! 25
+CH3+O=CH2O+H           8.43E+13   0.0          0.    ! 26
+CH3+OH=CH2O+H2         8.00E+12   0.0          0.    ! 27
+CH3+O2=CH3O+O          4.30E+13   0.0      30808.    ! 28
+CH3+O2=CH2O+OH         5.20E+13   0.0      34895.    ! 29
+CH3+HO2=CH3O+OH        2.28E+13   0.0          0.    ! 30  
+CH3+HCO=CH4+CO         3.20E+11   0.50         0.    ! 31
+CH4(+M)=CH3+H(+M)      6.3E14     0.0     104000.    ! 32 
+    LOW/6.3E-3   0.0   18000./
+CH4+H=CH3+H2           7.80E+06   2.11       7744.   ! 33
+CH4+O=CH3+OH           1.90E+09   1.44       8676.   ! 34
+CH4+O2=CH3+HO2         5.60E+12   0.0       55999.   ! 35
+CH4+OH=CH3+H2O         1.50E+06   2.13       2438.   ! 36
+CH4+HO2=CH3+H2O2       4.60E+12   0.0       17997.   ! 37
+CH3O+H=CH2O+H2         2.00E+13   0.0           0.   ! 38
+CH3O+OH=CH2O+H2O       5.00E+12   0.0           0.   ! 39
+CH3O+O2=CH2O+HO2       4.28E-13   7.60      -3528.   ! 40
+CH3O+M=CH2O+H+M      1.00E+14     0.0       25096.   ! 41
+END

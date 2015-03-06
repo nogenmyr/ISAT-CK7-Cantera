@@ -1,0 +1,42 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified: Sat,  3 Apr 2010 17:56:29 -0400
+
+include ../build-files/vars.windows
+
+CEQ_PATH=..\CEQ
+ISATAB_PATH=..\isatab_ser
+ISATCK_EXT_PATH=..\isat-ck-ext
+IFLAGS = /I$(ISATAB_PATH) /I$(CEQ_PATH) /I$(ISATCK_EXT_PATH)
+
+LIB_NAME = isatck
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS=$(FILESf90:.f90=.obj) $(FILESf:.f=.obj)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) BUILD-CEQ BUILD-ISATAB BUILD-STREAMS-MOD $(CREATE_LIBS)
+
+BUILD-CEQ:
+	(cd $(CEQ_PATH) & $(MAKE))
+	$(TOUCH) $@
+
+BUILD-ISATAB:
+	(cd $(ISATAB_PATH) & $(MAKE))
+	$(TOUCH) $@
+
+BUILD-STREAMS-MOD:
+	(cd $(ISATCK_EXT_PATH) & $(MAKE) STREAMS-MOD)
+	$(TOUCH) $@
+
+include ../build-files/build-targets.windows
+
+clean::
+	$(RM) BUILD-CEQ BUILD-ISATAB BUILD-STREAMS-MOD
+
+# ----------- DEPENDENCIES -----------------
+
+include DEPENDS.mk

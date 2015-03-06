@@ -1,0 +1,23 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu,  8 Jul 2010 17:43:11 -0400
+
+include ../build-files/vars.windows
+include ../build-files/PATHS.windows
+
+LIB_NAME = x2f_mpi
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS=$(FILESf90:.f90=.obj) $(FILESc:.c=.obj) $(MPI_OBJ)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(CREATE_LIBS)
+
+include ../build-files/build-targets.windows
+
+# ----------- DEPENDENCIES -----------------
+
+include DEPENDS.mk

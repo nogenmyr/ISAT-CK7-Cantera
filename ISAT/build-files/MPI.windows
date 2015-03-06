@@ -1,0 +1,13 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Mon, 6 Feb 2012 12:43:01 -0500 by Steve Lantz
+
+# This file should provide the path to mpi.f90 which is used to
+# compile mpi code in ISAT.
+
+# mpi.f90 source file used on CATS, name and path
+MPI_FILE = mpi.f90
+MPI_PATH = "C:\Program Files\Microsoft HPC Pack 2008 R2\Inc\mpi.f90"
+
+# set MPI_OBJ
+MPI_OBJ=$(MPI_FILE:.f90=.obj)
+

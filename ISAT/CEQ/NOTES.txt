@@ -1,0 +1,82 @@
+THERMODYNAMIC DATA AND CHEMKIN
+------------------------------
+
+CEQ is written to be independent of Chemkin: there are no
+calls to Chemkin routines from within CEQ.  The needed
+thermochemical data is passed to CEQ in two arrays, Ein and
+thermo.  Ein is the element matrix (giving the number of
+atoms of each element in the different species); and thermo
+provides, for each species, the thermodynamic data in the
+standard form of seven polynomial coefficients in two
+temperature ranges. (More details are provided below.)
+
+If CEQ is used in conjunction with Chemkin, then the needed
+thermochemical data can be readily obtained by calling the
+subroutine  ceq_ck  which is provided.
+
+Because Chemkin II has several variants, the Chemkin-related
+code in ceq_ck and demo2 may need to be modified to run with
+different versions of Chemkin.
+
+PRECISION
+---------
+All reals are kind(1.d0), i.e., double precision.
+
+SUBROUTINES
+-----------
+The two primary CEQ subroutines are:
+
+ceq_sys_init  - initialize the data structure (e.g., denoted
+                by SYS) for a given system (i.e., for a given
+                set of species and constraints, if any).  
+                This must be called before any other routine
+                that references SYS.  Multiple systems
+                may be initialized, e.g., SYS1, SYS2,...
+
+ceq_state     - perform a specified equilibrium calculation
+                for system SYS
+
+Other user-callable CEQ subroutines are:
+
+ceq_ck        - obtain the necessary thermochemical data from
+                Chemkin (for use in the call to ceq_sys_init).
+
+ceq_param_set - reset numerical parameters used in CEQ for SYS
+
+ceq_param_def - reset numerical parameters used in CEQ for SYS
+                to their default values
+
+ceq_sys_rm    - delete the data structure SYS
+
+The module ceq_system.f90  contains: ceq_sys_init, ceq_param_set, ceq_param_def, ceq_sys_rm  
+The module ceq_state_m.f90 contains: ceq_state 
+
+Refer to the source code of these routines for definitions of
+their arguments.
+
+USEAGE
+------
+
+The useage of the CEQ is illustrated in demo1.f90 and
+demo2.f90.  The essential ingredients are as follows.
+
+!----------------------------------------------------------
+subroutine my_sub
+
+use ceq_system    ! this CEQ module must be available
+implicit none
+type (sys_type), pointer, save :: SYS  !  declare SYS  
+
+...other declarations and specification of variables....
+
+!  initialize SYS
+call ceq_sys_init( ns, ne, ncs, ng, Ein, CS, Bg, &
+                   thermo_in, lu_op, diag, SYS, iret )
+
+!  equilibrium calculation for SYS
+ceq_state( SYS, .... )
+
+....
+
+end subroutine my_sub
+!------------------------------------------------------------

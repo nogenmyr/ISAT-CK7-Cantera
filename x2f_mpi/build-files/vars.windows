@@ -1,0 +1,26 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:   Mon Jan 31 2011 17:05:34 -0400 by Steve Lantz
+
+FC=ifort
+CC=cl
+
+#Optimize Mode Flags:
+FCFLAGS = /nologo /nodebug /nocheck /traceback /threads /Qlowercase /Qvec-report:0
+
+#Debug Mode Flags:
+#FCFLAGS = /nologo /debug:full /warn:unused /Qtrapuv /Qlowercase /Qfp-stack-check /traceback /check:pointer /check:bounds /check:uninit /libs:static /threads /dbglibs
+
+IFLAGS = /include:$(MPI_INC) /include:"..\x2f_mpi"
+
+LINK_OPS = /link /nodefaultlib:libc /INCREMENTAL:NO /SUBSYSTEM:CONSOLE /NOLOGO /stack:500000000
+
+LN = copy /Y
+CP = copy /Y
+RM = del /Q
+AR = lib
+OBJ = obj
+TOUCH = echo "" >
+MAKE = nmake -f Makefile.windows
+NAME = empty
+MPI_OBJ = null
+CREATE_LIBS = $(LIB_NAME).lib

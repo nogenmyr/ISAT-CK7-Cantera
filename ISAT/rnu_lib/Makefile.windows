@@ -1,0 +1,18 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu, 12 Nov 2009 16:30:56 -0500
+
+include ../build-files/vars.windows
+
+LIB_NAME = isat_rnu
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS=$(FILES:.f90=.obj)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(CREATE_LIBS)
+
+include ../build-files/build-targets.windows

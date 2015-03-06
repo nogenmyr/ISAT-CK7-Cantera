@@ -1,0 +1,24 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last modified: Wed, 26 Aug 2009 00:45:22 -0400
+
+FC=ifort
+
+#Optimize Mode Flags:
+FCFLAGS = /nologo /nodebug /nocheck /traceback /threads /Qlowercase /Qvec-report:0
+
+#Debug Mode Flags:
+#FCFLAGS = /nologo /debug:full /warn:unused /Qtrapuv /Qlowercase /Qfp-stack-check /traceback /check:pointer /check:bounds /check:uninit /libs:static /threads /dbglibs
+
+LINK_OPS = /link /INCREMENTAL:NO /SUBSYSTEM:CONSOLE /NOLOGO /stack:500000000
+
+LN = copy /Y
+CP = copy /Y
+RM = del /Q
+RMDIR = rmdir /s /q
+AR = lib
+OBJ = obj
+TOUCH = echo "" >
+MAKE = nmake -f Makefile.windows
+NAME = empty
+MPI_OBJ = null
+CREATE_LIBS = $(LIB_NAME).lib

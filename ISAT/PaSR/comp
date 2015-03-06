@@ -1,0 +1,5 @@
+touch *
+mpif90 -O2 -fPIC -ftree-vectorizer-verbose=1 -I../isatab_ser -I../isat-ck -I../ice-pic -c pasr.f
+mpif90 -O2 -fPIC -ftree-vectorizer-verbose=1 -I../isatab_ser -I../isat-ck -I../ice-pic -c pasrsubs.f
+mpif90 -O2 -fPIC -ftree-vectorizer-verbose=1 -I../isatab_ser -I../isat-ck -I../ice-pic -c usrate.f
+#mpif90 -o PaSR pasr.o pasrsubs.o usrate.o -Bstatic -L/home/kalle/work/ISAT-CK7/ISAT/lib -lisat7_ser  -l:liblapack.so.3 -Bdynamic  -L/home/kalle/work/ISAT-CK7/ISAT_dependencies/lib

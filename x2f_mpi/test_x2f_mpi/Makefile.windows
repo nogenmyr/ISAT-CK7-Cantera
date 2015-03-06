@@ -1,0 +1,27 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu,  8 Jul 2010 17:47:44 -0400
+
+include ../build-files/vars.windows
+include ../build-files/PATHS.windows
+
+LIBS_PATH = ..\lib
+
+LDFLAGS = /LIBPATH:$(LIBS_PATH) /LIBPATH:$(MKL_LIBS_PATH) /LIBPATH:$(MPI_LIBS_PATH) x2f_mpi.lib msmpifec.lib msmpi.lib mkl_intel_lp64.lib mkl_intel_thread.lib mkl_core.lib libiomp5mt.lib
+
+NAME = test_x2f_mpi.exe
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS = $(FILES:.f90=.obj) $(MPI_OBJ)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(NAME)
+
+include ../build-files/build-targets.windows
+
+# ----------- DEPENDENCIES -----------------
+
+include DEPENDS.mk

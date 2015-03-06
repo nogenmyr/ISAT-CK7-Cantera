@@ -1,0 +1,150 @@
+  
+=====  ISAT-CK Version: 7.0        initialization starting  ====== 
+  
+Date (MM/DD/YEAR): 11/29/2012 Time: 15:51:13.
+  
+ modeci =            7
+  
+ cickin: Initializing Chemkin II 
+ Calling Chemkin (cklen) with iflag
+
+  CKLIB:  Chemical Kinetics Library
+          CHEMKIN-II Version 4.5, January 1995
+          DOUBLE PRECISION
+  
+ cickin: Chemkin initialization successful.
+  
+ Number of elements  =            5
+ Number of species   =           17
+ Number of reactions =           41
+  
+  
+ No variables have been read from ci.nml                        
+  
+ Values of CI constants: set in ci_info_set, modified through ci.nml
+ &CINML
+ CON_PR  =           1,
+ CON_DT  =           1,
+ US_RATE =           0,
+ RADIATE =           0,
+ KREAL   =           2,
+ ICHDAS  =           1,
+ ICKCORR =           0,
+ M_SENS  =           1,
+ NJACS   =          41,
+ Q_PADE  =           5,
+ EXP_M   =           2,
+ LU_SENS =          -1,
+ IORV    =           0,
+ OP_PARAM        =           1,
+ MPI_UNIQ        =           0,
+ KREAL_H =           0,
+ KREAL_T =           0,
+ ATOLC   =  1.000000000000000E-008,
+ RTOLC   =  1.000000000000000E-009,
+ ATOLS   =  1.000000000000000E-002,
+ RTOLS   =  1.000000000000000E-002,
+ PHIREF  =  0.000000000000000E+000,
+ TEMPREF =  0.000000000000000E+000,
+ PRESSREF        =  0.000000000000000E+000,
+ HSREF   =  0.000000000000000E+000,
+ HSFREF  =  0.000000000000000E+000,
+ DTREF   =  9.999999747378752E-005,
+ TBADLO  =   250.000000000000     ,
+ TBADHI  =   3000.00000000000     ,
+ SENS_LIM        =   2.00000000000000     ,
+ M_JAC   =           0,
+ M_CKWYP =           1
+ /
+  
+CI arrays to be allocated with: nc=  18, nfull=  21, nstr=   3
+  
+  
+ Species, mol. wt., and their elemental composition
+  
+    1  H2O              18.0153  2  1  0  0  0
+    2  CO2              44.0100  0  2  1  0  0
+    3  N2               28.0134  0  0  0  2  0
+    4  O2               31.9988  0  2  0  0  0
+    5  CH4              16.0430  4  0  1  0  0
+    6  CO               28.0106  0  1  1  0  0
+    7  H                 1.0080  1  0  0  0  0
+    8  H2                2.0159  2  0  0  0  0
+    9  OH               17.0074  1  1  0  0  0
+   10  O                15.9994  0  1  0  0  0
+   11  CH3              15.0351  3  0  1  0  0
+   12  HCO              29.0185  1  1  1  0  0
+   13  HO2              33.0068  1  2  0  0  0
+   14  H2O2             34.0147  2  2  0  0  0
+   15  CH2O             30.0265  2  1  1  0  0
+   16  CH3O             31.0345  3  1  1  0  0
+   17  AR               39.9480  0  0  0  0  1
+  
+Starting equilibrium calculation for stream  1, kstr =  2
+  
+Equilibrium temperature = 2599.14 (K)
+  
+ Output from ci_init6: stream information (Chemkin units)
+  
+Press.    1.0132E+06  1.0132E+06  1.0132E+06
+Temp      2.5991E+03  3.0000E+02  3.0000E+02
+Dens.     1.2585E-04  1.1720E-03  6.5170E-04
+Enth      7.4144E+09  1.9076E+07 -4.6459E+10
+Sen.Enth  3.5161E+10  3.0297E+09  6.6742E+09
+  
+ Specific mole numbers
+  
+   1  H2O                 6.1087E-03  0.0000E+00  0.0000E+00
+   2  CO2                 2.3408E-03  0.0000E+00  0.0000E+00
+   3  N2                  2.5872E-02  2.7383E-02  0.0000E+00
+   4  O2                  6.2976E-04  7.2789E-03  0.0000E+00
+   5  CH4                 2.8240E-17  0.0000E+00  6.2332E-02
+   6  CO                  1.0979E-03  0.0000E+00  0.0000E+00
+   7  H                   1.5562E-04  0.0000E+00  0.0000E+00
+   8  H2                  4.4349E-04  0.0000E+00  0.0000E+00
+   9  OH                  4.9455E-04  0.0000E+00  0.0000E+00
+  10  O                   1.1223E-04  0.0000E+00  0.0000E+00
+  11  CH3                 1.7296E-16  0.0000E+00  0.0000E+00
+  12  HCO                 5.7252E-10  0.0000E+00  0.0000E+00
+  13  HO2                 1.3243E-07  0.0000E+00  0.0000E+00
+  14  H2O2                6.9171E-09  0.0000E+00  0.0000E+00
+  15  CH2O                5.3076E-12  0.0000E+00  0.0000E+00
+  16  CH3O                1.2857E-18  0.0000E+00  0.0000E+00
+  17  AR                  0.0000E+00  0.0000E+00  0.0000E+00
+  
+ Mass fractions 
+  
+   1  H2O                 1.1005E-01  0.0000E+00  0.0000E+00
+   2  CO2                 1.0302E-01  0.0000E+00  0.0000E+00
+   3  N2                  7.2476E-01  7.6708E-01  0.0000E+00
+   4  O2                  2.0152E-02  2.3292E-01  0.0000E+00
+   5  CH4                 4.5306E-16  0.0000E+00  1.0000E+00
+   6  CO                  3.0754E-02  0.0000E+00  0.0000E+00
+   7  H                   1.5686E-04  0.0000E+00  0.0000E+00
+   8  H2                  8.9406E-04  0.0000E+00  0.0000E+00
+   9  OH                  8.4110E-03  0.0000E+00  0.0000E+00
+  10  O                   1.7956E-03  0.0000E+00  0.0000E+00
+  11  CH3                 2.6005E-15  0.0000E+00  0.0000E+00
+  12  HCO                 1.6614E-08  0.0000E+00  0.0000E+00
+  13  HO2                 4.3710E-06  0.0000E+00  0.0000E+00
+  14  H2O2                2.3528E-07  0.0000E+00  0.0000E+00
+  15  CH2O                1.5937E-10  0.0000E+00  0.0000E+00
+  16  CH3O                3.9901E-17  0.0000E+00  0.0000E+00
+  17  AR                  0.0000E+00  0.0000E+00  0.0000E+00
+  
+ Reference values: 
+Species:     phiref   =   1.0000E-01
+Temperature: tempref  =   2.5991E+03
+Pressure:    pressref =   1.0132E+06
+Sens. enth.: hsref    =   1.1397E+11
+Time interv: dtref    =   1.0000E-04
+  
+Pressure is taken to be constant, =    1.0132E+06
+  
+ Time step is taken to be constant.
+  
+ Enthalpy equation does not include radiative heat loss.
+  
+ Number of independent ISAT variables, nx =           18
+  
+ ======  ISAT-CK initialization completed  ====== 

@@ -1,0 +1,28 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu,  8 Jul 2010 17:45:21 -0400
+
+include ../build-files/vars.windows
+include ../build-files/PATHS.windows
+
+LIBS_PATH = ..\lib
+ISAT_LIBS_PATH = ..\..\ISAT\lib
+
+LDFLAGS = /LIBPATH:$(LIBS_PATH) /LIBPATH:$(ISAT_LIBS_PATH) /LIBPATH:$(MKL_LIBS_PATH) /LIBPATH:$(MPI_LIBS_PATH) isat7_mpi.lib adifor.lib ceq.lib ck.lib ell.lib ice_pic.lib isat7_mpi.lib isatab_mpi.lib isatck.lib isatck_ext.lib isat_rnu.lib sell.lib x2f_mpi.lib x2f_mpi_isat.lib msmpifec.lib msmpi.lib mkl_intel_lp64.lib mkl_intel_thread.lib mkl_core.lib libiomp5mt.lib
+
+NAME = pasr_multi.exe
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS = $(FILESf90:.f90=.obj) $(FILESf:.f=.obj) $(MPI_OBJ)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(NAME)
+
+include ../build-files/build-targets.windows
+
+# ----------- DEPENDENCIES -----------------
+
+include DEPENDS.mk

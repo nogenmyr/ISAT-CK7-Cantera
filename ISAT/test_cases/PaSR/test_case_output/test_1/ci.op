@@ -1,0 +1,12 @@
+  
+=====  ISAT-CK Version: 7.0        initialization starting  ====== 
+  
+Date (MM/DD/YEAR): 11/29/2012 Time: 15:43: 6.
+  
+ modeci =            1
+  
+CI arrays to be allocated with: nc=   1, nfull=   1, nstr=   1
+  
+cinit1: modeci=1 initialized; dens =   1.2000E+00
+  
+ ======  ISAT-CK initialization completed  ====== 

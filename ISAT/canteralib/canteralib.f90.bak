@@ -1,0 +1,711 @@
+      SUBROUTINE CKAWT (ICKWRK, RCKWRK, AWT, gas)
+!  SUBROUTINE CKAWT  (ICKWRK, RCKWRK, AWT)
+!     Returns the atomic weights of the elements
+!
+!  INPUT
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     AWT    - Atomic weights of the elements.
+!                   cgs units - gm/mole
+!                   Data type - real array
+!                   Dimension AWT(*) at least MM, the total number of
+!                   elements in the problem.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), AWT(*)
+      type(phase_t) ::  gas
+      call getAtomicWeights(gas, AWT)
+!      CALL ERCKSTUB('CKAWT ')
+      RETURN
+      END
+
+      SUBROUTINE CKCOMP (IST, IRAY, II, I, gas)
+!  SUBROUTINE CKCOMP (IST, IRAY, II, I)*
+!     Returns the index of an element of a reference character
+!     string array which corresponds to a character string;
+!     leading and trailing blanks are ignored.
+!
+!
+!  INPUT
+!     IST   - A character string.
+!                  Data type - CHARACTER*(*)
+!     IRAY  - An array of character strings;
+!                  Data type - CHARACTER*(*)
+!                  Dimension IRAY(*) at least II
+!     II    - The length of IRAY.
+!                  Data type - integer scalar.
+!
+!  OUTPUT
+!     I     - The first integer location in IRAY in which IST
+!             corresponds to IRAY(I); if IST is not also an
+!             entry in IRAY, I=0.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H,O-Z), INTEGER (I-N)
+      CHARACTER*(*) IST, IRAY(*)
+      I = speciesIndex(gas, IST)
+!      CALL ERCKSTUB('CKCOMP')
+      RETURN
+      END
+
+      SUBROUTINE CKCPBS (T, Y, ICKWRK, RCKWRK, CPBMS, gas)
+!  SUBROUTINE CKCPBS (T, Y, ICKWRK, RCKWRK, CPBMS)
+!     Returns the mean specific heat at constant pressure;
+!     see Eq. (34).
+!
+!  INPUT
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     Y      - Mass fractions of the species.
+!                   cgs units - none
+!                   Data type - real array
+!                   Dimension Y(*) at least KK, the total number of
+!                   species.
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     CPBMS  - Mean specific heat at constant pressure in mass units.
+!                   cgs units - ergs/(gm*K)
+!                   Data type - real scalar
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), Y(*)
+      type(phase_t) :: gas
+
+      call setTemperature(gas, T)
+      call setMassfractions(gas, Y)
+      CPBMS = cp_mass(gas)*1.d4 ! J/kg*K to ergs/gm*K
+!      WRITE(*,*)'CKCPBS'
+!      CALL ERCKSTUB('CKCPBS')
+      RETURN
+      END
+
+      SUBROUTINE CKCPML (T, ICKWRK, RCKWRK, CPML, gas)
+!  SUBROUTINE CKCPML (T, ICKWRK, RCKWRK, CPML)
+!     Returns the specific heats at constant pressure in molar units
+!
+!  INPUT
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     CPML   - Specific heats at constant pressure in molar units
+!              for the species.
+!                   cgs units - ergs/(mole*K)
+!                   Data type - real array
+!                   Dimension CPML(*) at least KK, the total number of
+!                   species.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), CPML(*)
+      integer :: NSP
+      double precision :: p=101325.
+      double precision, dimension(200) :: X=0.
+      type(phase_t) :: gas
+      NSP = nSpecies(gas)
+
+      DO 100 K = 1, NSP
+        X=0.
+        X(K)=1.
+        call setState_TPX(gas, T, p, X)
+        CPML(K) = cp_mole(gas)*1.d4 !J/kmol*K to erg/mol : 1e4
+!        WRITE(*,*) CPML(K)
+  100 CONTINUE
+!      WRITE(*,*)'CKCMPL'
+!      CALL ERCKSTUB('CKCMPL')
+      RETURN
+      END
+
+      SUBROUTINE CKHBMS (T, Y, ICKWRK, RCKWRK, HBMS, gas)
+!  SUBROUTINE CKHBMS (T, Y, ICKWRK, RCKWRK, HBMS)
+!     Returns the mean enthalpy of the mixture in mass units;
+!     see Eq. (38).
+!
+!  INPUT
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     Y      - Mass fractions of the species.
+!                   cgs units - none
+!                   Data type - real array
+!                   Dimension Y(*) at least KK, the total number of
+!                   species.
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     HBMS   - Mean enthalpy in mass units.
+!                   cgs units - ergs/gm
+!                   Data type - real scalar
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), Y(*)
+      type(phase_t) :: gas
+      DOUBLE PRECISION :: dens = 1.0
+
+      call setState_TRY(gas, T, dens, Y) ! ideal gas, rho does not matter for H
+      HBMS = enthalpy_mass(gas)*1.d4 ! J/kg to erg/gm
+!      WRITE(*,*)'CKHBMS'
+!      CALL ERCKSTUB('CKHBMS')
+      RETURN
+      END
+
+      SUBROUTINE CKHML (T, ICKWRK, RCKWRK, HML, gas)
+!  SUBROUTINE CKHML  (T, ICKWRK, RCKWRK, HML)
+!     Returns the enthalpies in molar units
+!
+!  INPUT
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     HML    - Enthalpies in molar units for the species.
+!                   cgs units - ergs/mole
+!                   Data type - real array
+!                   Dimension HML(*) at least KK, the total number of
+!                   species.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), HML(*)
+!      CHARACTER(LEN=10) :: speciesstring, spname
+!      CHARACTER(LEN=2) :: nmoles=":1"
+      integer :: NSP
+      double precision :: p=101325.
+      double precision, dimension(200) :: X=0.
+      type(phase_t) :: gas
+      NSP = nSpecies(gas)
+      if (NSP .gt. 200) write(*,*) "This will seqfault"
+
+      DO 100 K = 1, NSP
+        X(K)=1.
+!        call getSpeciesName(gas, K, spname)
+!        speciesstring = spname
+!        speciesstring(8: ) = nmoles
+!        write(*,*) speciesstring
+!        write(*,*) X
+        call setState_TPX(gas, T, p, X)
+        HML(K) = enthalpy_mole(gas)*1.d4 !J/kmol to erg/mol : 1e4
+        X(K)=0.
+!        WRITE(*,*) HML(K)
+  100 CONTINUE
+!      WRITE(*,*)   'CKHML '   
+!      CALL ERCKSTUB('CKHML ')
+      RETURN
+      END
+
+      SUBROUTINE CKHMS (T, ICKWRK, RCKWRK, HMS, gas)
+!  START PROLOGUE
+!
+!  SUBROUTINE CKHMS  (T, ICKWRK, RCKWRK, HMS)
+!     Returns the enthalpies in mass units;  see Eq. (27).
+!
+!  INPUT
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!  OUTPUT
+!     HMS    - Enthalpies in mass units for the species.
+!                   cgs units - ergs/gm
+!                   Data type - real array
+!                   Dimension HMS(*) at least KK, the total number of
+!                   species.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), HMS(*)
+!      CHARACTER(LEN=10) :: speciesstring, spname
+!      CHARACTER(LEN=2) :: nmoles=":1"
+      integer :: NSP
+      double precision :: p=101325.
+      double precision, dimension(200) :: X=0.
+      type(phase_t) :: gas
+      NSP = nSpecies(gas)
+      if (NSP .gt. 200) write(*,*) "This will seqfault"
+
+      DO 100 K = 1, NSP
+        X(K)=1.
+        call setState_TPX(gas, T, p, X)
+        HMS(K) = enthalpy_mass(gas)*1.d4 !J/kg to erg/gm : 1e4
+        X(K)=0.
+!        WRITE(*,*) HMS(K)
+  100 CONTINUE
+!      WRITE(*,*)'CKHMS '
+!      CALL ERCKSTUB('CKHMS ')
+      RETURN
+      END
+
+      SUBROUTINE CKINDX (ICKWRK, RCKWRK, MM, KK, II, NFIT, gas)
+!  SUBROUTINE CKINDX (ICKWRK, RCKWRK, MM, KK, II, NFIT)*
+!     Returns a group of indices defining the size of the particular
+!     reaction mechanism
+!
+!  INPUT
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     MM     - Total number of elements in mechanism.
+!                   Data type - integer scalar
+!     KK     - Total number of species in mechanism.
+!                   Data type - integer scalar
+!     II     - Total number of reactions in mechanism.
+!                   Data type - integer scalar
+!     NFIT   - number of coefficients in fits to thermodynamic data
+!              for one temperature range; NFIT = number of
+!              coefficients in polynomial fits to CP/R  +  2.
+!                   Data type - integer scalar
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*)
+      type(phase_t) ::  gas
+        MM = nElements(gas)
+        KK = nSpecies(gas)
+        II = nReactions(gas)
+        NFIT = 7 ! not used?
+!      WRITE(*,*)'CKINDX'
+!      CALL ERCKSTUB('CKINDX')
+      RETURN
+      END
+
+      SUBROUTINE CKINIT (LENIWK, LENRWK, LENCWK, LINC, LOUT, ICKWRK,          &
+     &                   RCKWRK, CCKWRK, IFLAG, gas)
+!  START PROLOGUE
+!
+!  SUBROUTINE CKINIT (LENIWK, LENRWK, LENCWK, LINC, LOUT, ICKWRK,
+!                     RCKWRK, CCKWRK, IFLAG)*
+!     Reads the binary file and creates the internal work arrays
+!     ICKWRK, CCKWRK, and RCKWORK.  CKINIT must be called before any
+!     other CHEMKIN subroutine is called.  The work arrays must then
+!     be made available as input to the other CHEMKIN subroutines.
+!
+!  INPUT
+!     LENIWK - Length of the integer work array, ICKWRK.
+!                   Data type - integer scalar
+!     LENCWK - Length of the character work array, CCKWRK.
+!              The minimum length of CCKWRK(*) is MM + KK.
+!                   Data type - integer scalar
+!     LENRWK - Length of the real work array, WORK.
+!                   Data type - integer scalar
+!     LINC  -  Logical file number for the binary file.
+!                   Data type - integer scalar
+!     LOUT  -  Output file for printed diagnostics.
+!                   Data type - integer scalar
+!
+!  OUTPUT
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!     CCKWRK - Array of character work space.
+!                   Data type - CHARACTER*16 array
+!                   Dimension CCKWRK(*) at least LENCWK.
+!     IFLAG  - IFLAG=0 indicates successful reading of
+!              binary linking file; IFLAG>0 indicates
+!              error type.
+!                   Data type - integer
+      USE cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(1), RCKWRK(1)
+      CHARACTER*(*) CCKWRK(1)
+      integer nsp, nrxns
+      double precision :: t, p
+      type(phase_t) ::  gas
+      ILOG = 1
+      gas = importPhase('mech.xml','gas', ILOG)
+
+      KK = nSpecies(gas)
+      IFLAG = 0
+      if (KK .le. 0) then 
+        WRITE(*,*) "Cantera failed to open mechanism: ", &
+        & "Check existence of mech.cti file!"
+        IFLAG=1
+      endif
+      call setState_TPX(gas, t, p, 'N2:1')
+!      WRITE(*,*)'CKINIT'
+!      CALL ERCKSTUB('CKINIT')
+      RETURN
+      END
+ 
+      SUBROUTINE CKLEN (LINC, LOUT, LI, LR, LC, IFLAG)
+!  SUBROUTINE CKLEN (LINC, LOUT, LENI, LENR, LENC, IFLAG)
+!     Returns the lengths required for the work arrays.
+!
+!  INPUT
+!
+!     LINC  -  Logical file number for the binary file.
+!                   Data type - integer scalar
+!     LOUT  -  Output file for printed diagnostics.
+!                   Data type - integer scalar
+!
+!  OUTPUT
+!     LENI  -  Minimum length required for the integer work array.
+!                   Data type - integer scalar
+!     LENR  -  Minimum length required for the real work array.
+!                   Data type - integer scalar
+!     LENC  -  Minimum length required for the character work array.
+!     IFLAG  - IFLAG=0 indicates successful reading of
+!              binary linking file; IFLAG>0 indicates
+!              error type.
+!                   Data type - integer
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      LENI=10000
+      LENR=10000
+      LENC=10000
+      IFLAG=0
+!      CALL ERCKSTUB('CKLEN ')
+!      WRITE(*,*)'CKLEN '
+      RETURN
+      END
+ 
+      SUBROUTINE CKNCF (MDIM, ICKWRK, RCKWRK, NCF, gas)
+!  SUBROUTINE CKNCF  (MDIM, ICKWRK, RCKWRK, NCF)
+!     Returns the elemental composition of the species
+!
+!  INPUT
+!     MDIM   - First dimension of the two-dimensional array NCF;
+!              MDIM must be equal to or greater than the number of
+!              elements, MM.
+!                   Data type - integer scalar
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     NCF    - Matrix of the elemental composition of the species;
+!              NCF(M,K) is the number of atoms of the Mth element
+!              in the Kth species.
+!                   Data type - integer array
+!                   Dimension NCF(MDIM,*) exactly MDIM (at least MM,
+!                   the total number of elements in the problem) for
+!                   the first dimension and at least KK, the total
+!                   number of species, for the second.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      type(phase_t) ::  gas
+      DIMENSION ICKWRK(*), RCKWRK(*), NCF(MDIM,*)
+      integer :: NELEM, NSP
+
+      NELEM = nElements(gas)
+      NSP = nSpecies(gas)
+
+      DO 100 K = 1, NSP
+        DO 200 M = 1, NELEM
+         NCF(M,K) = nAtoms(gas, K, M)
+!         WRITE(*,*) K, M, NCF(M,K)
+  200   CONTINUE
+  100 CONTINUE
+!      CALL ERCKSTUB('CKNCF ')
+!      WRITE(*,*)'CKNCF '
+      RETURN
+      END
+ 
+      SUBROUTINE CKNU (KDIM, ICKWRK, RCKWRK, NUKI, gas)
+!  SUBROUTINE CKNU   (KDIM, ICKWRK, RCKWRK, NUKI)
+!     Returns the stoichiometric coefficients of the reaction
+!     mechanism;  see Eq. (50).
+!
+!  INPUT
+!     KDIM   - First dimension of the two-dimensional array NUKI;
+!              KDIM must be greater than or equal to the total
+!              number of species, KK.
+!                   Data type - integer scalar
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     NUKI   - Matrix of stoichiometric coefficients for the species
+!              in the reactions;  NUKI(K,I) is the stoichiometric
+!              coefficient of species K in reaction I.
+!                   Data type - integer array
+!                   Dimension NUKI(KDIM,*) exactly KDIM (at least KK,
+!                   the total number of species) for the first
+!                   dimension and at least II for the second, the total
+!                   number of reactions.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), NUKI(KDIM,*)
+      type(phase_t) :: gas
+      integer :: NELEM, NSP
+
+      NRXN = nReactions(gas)
+      NSP = nSpecies(gas)
+
+      DO 100 K = 1, NSP
+        DO 200 I = 1, NRXN
+         NUKI(K,I)=reactantStoichCoeff(gas, K, I)-productStoichCoeff(gas, K, I)
+!         WRITE(*,*) K, I, NUKI(K, I)
+  200   CONTINUE
+  100 CONTINUE
+!      CALL ERCKSTUB('CKNU  ')
+!      WRITE(*,*)'CKNU  '
+      RETURN
+      END
+ 
+      SUBROUTINE CKRHOY (P, T, Y, ICKWRK, RCKWRK, RHO, gas)
+!  SUBROUTINE CKRHOY (P, T, Y, ICKWRK, RCKWRK, RHO)
+!     Returns the mass density of the gas mixture given the pressure,
+!     temperature and mass fractions;  see Eq. (2).
+!
+!  INPUT
+!     P      - Pressure.
+!                   cgs units - dynes/cm**2
+!                   Data type - real scalar
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     Y      - Mass fractions of the species.
+!                   cgs units - none
+!                   Data type - real array
+!                   Dimension Y(*) at least KK, the total number of
+!                   species.
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     RHO    - Mass density.
+!                   cgs units - gm/cm**3
+!                   Data type - real scalar
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), Y(*)
+      type(phase_t) :: gas
+      call setTemperature(gas, T)
+      call setMassfractions(gas, Y)
+      call setPressure(gas, p/10.) ! from dyn/cm2 to Pa
+      RHO = density(gas)/1000. ! kg/m3 / 1000 
+
+!      CALL ERCKSTUB('CKRHOY')
+!      WRITE(*,*)'CKRHOY'
+      RETURN
+      END
+ 
+      SUBROUTINE CKRP (ICKWRK, RCKWRK, RU, RUC, PA)
+!  SUBROUTINE CKRP   (ICKWRK, RCKWRK, RU, RUC, PA)
+!     Returns universal gas constants and the pressure of one standard
+!     atmosphere
+!
+!  INPUT
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     RU     - Universal gas constant.
+!                   cgs units - 8.314510E7 ergs/(mole*K)
+!                   Data type - real scalar
+!     RUC    - Universal gas constant used only in conjuction with
+!              activation energy.
+!                   preferred units - RU / 4.184 cal/(mole*K)
+!                   Data type - real scalar
+!     PA     - Pressure of one standard atmosphere.
+!                   cgs units - 1.01325E6 dynes/cm**2
+!                   Data type - real scalar
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*)
+      RU = 83145100.
+      RUC = 19872155.
+      PA = 1013250.
+      
+!      CALL ERCKSTUB('CKRP  ')
+!      WRITE(*,*)'CKRP  '
+      RETURN
+      END
+ 
+      SUBROUTINE CKSYME (CCKWRK, LOUT, ENAME, KERR, gas)
+!  SUBROUTINE CKSYME (CCKWRK, LOUT, ENAME, KERR)*
+!     Returns the character strings of element names.
+!
+!  INPUT
+!     CCKWRK - Array of character work space.
+!                   Data type - CHARACTER*16 array
+!                   Dimension CCKWRK(*) at least LENCWK.
+!     LOUT   - Output unit for printed diagnostics.
+!                   Data type - integer scalar
+!
+!  OUTPUT
+!     ENAME  - Element names.
+!                   Data type - CHARACTER*(*) array
+!                   Dimension ENAME at least MM, the total number of
+!                   elements in the problem.
+!     KERR   - Error flag; character length error will result in
+!              KERR = .TRUE.
+!                   Data type - logical
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      CHARACTER*(*) CCKWRK(*), ENAME(*)
+      CHARACTER(LEN=10) :: elname
+      LOGICAL KERR
+      type(phase_t) :: gas
+      NE = nElements(gas)
+      DO 100 M = 1, NE
+        call getElementName(gas, M, elname)
+        ENAME(M) = elname
+  100 CONTINUE
+!      CALL ERCKSTUB('CKSYME ')
+!      WRITE(*,*)'CKSYME '
+      RETURN
+      END
+ 
+      SUBROUTINE CKSYMS (CCKWRK, LOUT, KNAME, KERR, gas)
+!  SUBROUTINE CKSYMS (CCKWRK, LOUT, KNAME, KERR)*
+!     Returns the character strings of species names
+!
+!  INPUT
+!     CCKWRK - Array of character work space.
+!                   Data type - CHARACTER*16 array
+!                   Dimension CCKWRK(*) at least LENCWK.
+!     LOUT   - Output unit for printed diagnostics.
+!                   Data type - integer scalar
+!
+!  OUTPUT
+!     KNAME  - Species names.
+!                   Data type - CHARACTER*(*) array
+!                   Dimension KNAME(*) at least KK,
+!                   the total number of species.
+!     KERR   - Error flag; character length errors will result in
+!              KERR = .TRUE.
+!                   Data type - logical
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      CHARACTER*(*) CCKWRK(*), KNAME(*)
+      CHARACTER(LEN=10) :: spname
+      LOGICAL KERR
+      type(phase_t) :: gas
+      NSP = nSpecies(gas)
+      DO 100 K = 1, NSP
+        call getSpeciesName(gas, K, spname)
+        KNAME(K) = spname
+  100 CONTINUE
+!      CALL ERCKSTUB('CKSYMS')
+!      WRITE(*,*)'CKSYMS'
+      RETURN
+      END
+ 
+      SUBROUTINE CKWT (ICKWRK, RCKWRK, WT, gas)
+!  SUBROUTINE CKWT   (ICKWRK, RCKWRK, WT)
+!     Returns the molecular weights of the species
+!
+!  INPUT
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     WT     - Molecular weights of the species.
+!                   cgs units - gm/mole
+!                   Data type - real array
+!                   Dimension WT(*) at least KK, the total number of
+!                   species.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), WT(*)
+      type(phase_t) ::  gas
+      call getMolecularWeights(gas, WT)
+      RETURN
+      END
+ 
+      SUBROUTINE CKWYP (P, T, Y, ICKWRK, RCKWRK, WDOT, gas)
+!  SUBROUTINE CKWYP  (P, T, Y, ICKWRK, RCKWRK, WDOT)
+!     Returns the molar production rates of the species given the
+!     pressure, temperature and mass fractions;  see Eq. (49).
+!
+!  INPUT
+!     P      - Pressure.
+!                   cgs units - dynes/cm**2
+!                   Data type - real scalar
+!     T      - Temperature.
+!                   cgs units - K
+!                   Data type - real scalar
+!     Y      - Mass fractions of the species.
+!                   cgs units - none
+!                   Data type - real array
+!                   Dimension Y(*) at least KK, the total number of
+!                   species.
+!     ICKWRK - Array of integer workspace.
+!                   Data type - integer array
+!                   Dimension ICKWRK(*) at least LENIWK.
+!     RCKWRK - Array of real work space.
+!                   Data type - real array
+!                   Dimension RCKWRK(*) at least LENRWK.
+!
+!  OUTPUT
+!     WDOT   - Chemical molar production rates of the species.
+!                   cgs units - moles/(cm**3*sec)
+!                   Data type - real array
+!                   Dimension WDOT(*) at least KK, the total number of
+!                   species.
+      use cantera
+      IMPLICIT DOUBLE PRECISION (A-H, O-Z), INTEGER (I-N)
+      DIMENSION ICKWRK(*), RCKWRK(*), Y(*), WDOT(*)
+      type(phase_t) ::  gas
+      
+      call setTemperature(gas, T)
+      call setMassfractions(gas, Y)
+      call setPressure(gas, p/10.)
+
+      NSP = nSpecies(gas)
+      call getNetProductionRates(gas, WDOT) ! kmol/m3*s
+      DO 100 K = 1, NSP
+        WDOT(K) = WDOT(K)/1000.
+  100 CONTINUE
+!      WRITE(*,*)'CKWYP '
+      RETURN
+      END
+

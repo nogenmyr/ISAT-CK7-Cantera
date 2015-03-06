@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta name="generator" content="HTML::TextToHTML v2.51"/>
+</head>
+<body>
+<h1><a name="section_1">ISAT-CK7: Fortran 90 libraries for the efficient implementation of combustion chemistry</a></h1>
+
+<h2><a name="section_1_1">OVERVIEW</a></h2>
+
+<p>The ISAT-CK7 package contains several Fortran libraries developed by
+Ithaca Combustion Enterprise, LLC and by the Turbulence and Combustion
+Group at Cornell University.  This package is made available under the
+BSD 3-Clause license.
+</p>
+<p>The principal components of the package and their functions are:
+</p>
+<ul>
+  <li>ISAT-CK - chemistry tabulation using the ISAT algorithm [1,4]
+  </li><li>ICE-PIC - dimension reduction using ICE-PIC [3] and RCCE [6,7,10]
+  </li><li>x2f_mpi - parallel interface for ISAT-CK using MPI [5,8]
+</li></ul>
+<p>The package also includes:
+</p>
+<ul>
+  <li>ISATAB - tabulation using ISAT for a general function f(x)
+  </li><li>CEQ - constrained and unconstrained chemical equilibrium
+calculations for ideal gas mixtures [2]
+  </li><li>ELL_LIB - routines to perform operations on hyper-ellipsoids
+  </li><li>PaSR - partially-stirred reactor [1] implementation demonstrating
+the use of ISAT-CK7 (for serial and parallel operations)
+</li></ul>
+<p>Other publications in which the performance of ISAT-CK /RCCE/x2f_mpi
+have been examined include [9].
+</p>
+<h2><a name="section_1_2">CAUTIONS</a></h2>
+
+<ul>
+  <li>ISAT-CK7 is a large, complicated package, which is non-trivial to
+install and to learn to use correctly.  The user should appreciate
+that its use requires a considerable investment of time and effort.
+  </li><li>The package makes use of Chemkin II, which, because of licensing
+issues, cannot be included in the package. We cannot assist the user
+in obtaining Chemkin II.
+  </li><li>Because of resource limitations, we are unable to provide any support
+to users.
+  </li><li>The documentation is incomplete, and some of it pertains to earlier
+versions.
+  </li><li>The use of the ICE-PIC option (as distinct from RCCE) is not
+recommended for robust efficient computations.
+</li></ul>
+<h2><a name="section_1_3">DOWNLOAD AND INSTALLATION</a></h2>
+
+<p>The ISAT-CK7 source code can be downloaded from here:
+<a href="http://tcg.mae.cornell.edu/ISATCK7/files/ISAT-CK7.zip">http://tcg.mae.cornell.edu/ISATCK7/files/ISAT-CK7.zip</a>
+</p>
+<p>The zip archive consists of two folders:
+</p>
+<ul>
+  <li>ISAT: collection of ISAT-CK, ISATAB, ELL_LIB, CEQ, ICE-PIC, RCCE
+and PaSR
+  </li><li>x2f_mpi: parallel interface for ISAT-CK using MPI
+</li></ul>
+<p>Follow the instructions given in the README.txt files included in the
+ISAT and x2f_mpi folders to build and install the code. Example test
+cases are also provided to help demonstrate the use of ISAT-CK7 and
+x2f_mpi.
+</p>
+<p>Information on how to link to external libraries like CHEMKIN II is
+provided in the README_dependencies.txt file included in the ISAT
+folder.
+</p>
+<h2><a name="section_1_4">DOCUMENTATION</a></h2>
+
+<h3><a name="section_1_4_1">ISAT-CK AND ISATAB</a></h3>
+<p>A copy of the original ISAT-CK 3.0 user guide is available here:
+<a href="http://tcg.mae.cornell.edu/ISATCK7/files/ISAT.pdf">http://tcg.mae.cornell.edu/ISATCK7/files/ISAT.pdf</a>
+</p>
+<p>This user guide describes the basic usage of ISAT-CK and ISATAB
+features. The current version of ISAT-CK7 adds more features to both
+ISAT-CK and ISATAB, however none of the interface routines (present in
+version 3.0) have been changed to maintain backward compatibility. The
+user is encouraged to refer to this manual to understand the working
+of ISAT-CK and ISATAB.
+</p>
+<p>The new dimension reduction modes - ICE-PIC and RCCE - are not
+documented in the above manual. However, example test files and
+documentation is provided with the source code on how to use these
+modes.
+</p>
+<h3><a name="section_1_4_2">CEQ</a></h3>
+<p>The algorithm used in CEQ is described in the report "The
+computation of constrained and unconstrained equilibrium compositions
+of ideal gas mixtures using Gibbs function continuation" by S.B. Pope,
+Cornell University Report FDA 03-02 (2003). <a href="http://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf">http://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf</a>
+</p>
+<p>You may also refer to S.B. Pope (2004) "Gibbs function continuation
+for the stable computation of chemical equilibrium," Combustion and
+Flame, 139, 222-226.
+</p>
+<h3><a name="section_1_4_3">ELL_LIB</a></h3>
+
+<p>The algorithms used in the ELL_LIB library are described in the report
+"Algorithms for ellipsoids" by S.B. Pope, Cornell University Report
+FDA 08-01 (2008). <a href="http://tcg.mae.cornell.edu/pubs/Pope_FDA_08.pdf">http://tcg.mae.cornell.edu/pubs/Pope_FDA_08.pdf</a>
+</p>
+<h2><a name="section_1_5">AUTHORS AND COPYRIGHT</a></h2>
+
+<ul>
+  <li>ISATAB, ELL_LIB, CEQ and ISAT-CK were written by Steve Pope and the
+copyright is held by Ithaca Combustion Enterprise, LLC.
+  </li><li>The authors of ICE-PIC are Zhuyin Ren, Varun Hiremath and Steve
+Pope, and the copyright is held by Cornell University.
+  </li><li>The authors of x2f_mpi are Liuyan Lu, Steve Lantz, Zhuyin Ren and
+Varun Hiremath, and the copyright is held by Cornell University.
+</li></ul>
+<h2><a name="section_1_6">CITING</a></h2>
+
+<p>In publications using this software, please cite the relevant
+publications (listed below) and also this web site, i.e.,
+</p>
+<ul>
+  <li>S.B. Pope, V. Hiremath, S.R. Lantz, Z. Ren and L. Lu (2012)
+ISAT-CK7:  "A Fortran 90 library to accelerate the implementation of
+combustion chemistry."   <a href="http://tcg.mae.cornell.edu/ISATCK7">http://tcg.mae.cornell.edu/ISATCK7</a>
+</li></ul>
+<h2><a name="section_1_7">PREVIOUS VERSIONS</a></h2>
+
+<p>The versions of ICE-PIC and x2f_mpi included in the package supersede
+(and are significantly different to) previous versions.  The versions
+of CEQ and ELL_LIB are essentially the same as previous versions, but
+contain minor bug fixes.
+</p>
+<h2><a name="section_1_8">ACKNOWLEDGEMENTS</a></h2>
+
+<p>The development of different aspects of the package at Cornell
+University have been supported in part by several grants:
+</p>
+<p>National Science Foundation under Grant No. CBET-0426787.
+</p>
+<p>Office of Energy Research, Office of Basic Energy Sciences, Chemical
+Sciences, Geosciences and Biosciences Division of the US Department of
+Energy (DOE) under Grant No. DE-FG02-90ER.
+</p>
+<p>Grant No. FA9550-09-1-0611 funded by the National Center for
+Hypersonic Combined Cycle Propulsion, sponsored by the AFOSR and NASA ARMD.
+</p>
+<p>NASA under Grant No. NNX08AB36A.
+</p>
+<p>(See publications for details.)
+</p>
+<h2><a name="section_1_9">REFERENCES</a></h2>
+
+<p>[1] S.B. Pope (1997) "Computationally efficient implementation of
+combustion chemistry using in situ adaptive tabulation", Combustion
+Theory and Modelling, 1, 41- 63.
+</p>
+<p>[2] S.B. Pope (2004) "Gibbs function continuation for the stable
+computation of chemical equilibrium", Combustion and Flame, 139,
+222-226.
+</p>
+<p>[3] Z. Ren, S.B. Pope, A. Vladimirsky and J.M. Guckenheimer (2006)
+"The invariant constrained equilibrium preimage curve method for the
+dimension reduction of chemical kinetics", Journal of Chemical
+Physics, 124, 114111.
+</p>
+<p>[4] L. Lu and S.B. Pope (2009) "An improved algorithm for in situ
+adaptive tabulation", Journal of Computational Physics, 228, 361-386.
+</p>
+<p>[5] L. Lu, S. R. Lantz, Z. Ren and S. B. Pope (2009) "Computationally
+efficient implementation of combustion chemistry in parallel PDF
+calculations", Journal of Computational Physics, 228, 5490-5525.
+</p>
+<p>[6] Z. Ren, G.M. Goldin, V. Hiremath and S.B. Pope (2011) "Reduced
+description of reactive flows with tabulated chemistry", Combustion
+Theory and Modelling, 15, 827-848.
+</p>
+<p>[7] V. Hiremath, Z. Ren and S.B. Pope (2011) "Combined dimension
+reduction and tabulation strategy using ISAT-RCCE-GALI for the
+efficient implementation of combustion chemistry", Combustion &amp; Flame,
+158, 2113-2127.
+</p>
+<p>[8] V. Hiremath, S.R. Lantz, H. Wang and S.B. Pope (2012)
+"Computationally-efficient and scalable parallel implementation of
+chemistry in simulations of turbulent combustion", Combustion and
+Flame, 159(12), 3096-3109.
+</p>
+<p>[9] V. Hiremath, S.R. Lantz, H. Wang and S.B. Pope (2012) "Large-scale
+parallel simulations of turbulent combustion using combined dimension
+reduction and tabulation of chemistry", Proceedings of the Combustion
+Institute, 34, (to be published).
+</p>
+<p>[10] V. Hiremath and S.B. Pope (2012) "A study of the rate-controlled
+constrained-equilibrium dimension reduction method and its different
+implementations", Combustion Theory and Modelling, (to be published).
+</p>
+<p>The html page is generated from the text file with the following command:
+</p>
+<p><a href="http://txt2html.sourceforge.net/">txt2html</a> ISAT-CK7.txt &gt; ISAT-CK7.html
+</p>
+<p>(Last modified on 3/15/13 by Steve Lantz)</p>
+
+</body>
+</html>

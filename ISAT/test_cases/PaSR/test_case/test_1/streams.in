@@ -1,0 +1,38 @@
+!----------------------------------------------------------------------------!
+!                                                                            !
+!      Sandia Flame DEF streams.in file (new format)                         !
+!      (for modes 6, 7, 8, and 9)                                            !
+!      Haifeng Wang, September, 2010                                         !
+!                                                                            !
+!      Note: * any part beginning with "!" is a comment                      !
+!            * empty lines are ignored                                       !
+!            * keywords are not case-sensitive                               !
+!                                                                            !
+!----------------------------------------------------------------------------!
+!
+! specify MODECI: the mode of thermochemistry to be used in ISAT
+!        = 1 or CONST_PROPERTY     - inert, constant-density flow
+!        = 2 or MIXTURE_FRACTION   - mixture fraction formulation
+!        = 3 or PROGRESS_VARIABLE  - reaction progress variable formulation
+!        = 4                       - not supported yet
+!        = 5                       - not supported yet
+!        = 6 or DIRECT_INTEGRATION - CHEMKIN/direct integration
+!        = 7 or ISAT_DI            - CHEMKIN/ISAT
+!        = 8 or RCCE               - CHEMKIN/ISAT/RCCE
+!        = 9 or ICE_PIC            - CHEMKIN/ISAT/ICE_PIC
+!
+
+!
+!      Specify the thermodynamic state of each stream.
+!      - Each stream begins with 'STREAM BEGIN' and ends with 'STREAM END'.
+!      - Each stream should have a unique name, e.g., "FUEL", "PILOT", "COFLOW"
+!      - The species can be specified in two units: [MOLE] and [MASS].
+!      - [EQUIL] [EQUIL-H] [EQUIL-T] indicate to use the equilibrium state of the stream
+!        [EQUIL] or [EQUIL-H]: constant enthalpy; [EQUIL-T]: constant temperature
+!      - P  : pressure in atmosphere unit
+!      - T  : temperature in unit [K]
+!
+
+MODECI  1
+
+DENSITY 1.2

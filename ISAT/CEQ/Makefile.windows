@@ -1,0 +1,22 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last Modified:  Thu, 12 Nov 2009 15:51:39 -0500
+
+include ../build-files/vars.windows
+
+LIB_NAME = ceq
+
+# ------------- OBJECTS --------------------
+
+include SOURCES.mk
+
+OBJS=$(FILES:.f90=.obj)
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(CREATE_LIBS)
+
+include ../build-files/build-targets.windows
+
+# ----------- DEPENDENCIES -----------------
+
+include DEPENDS.mk

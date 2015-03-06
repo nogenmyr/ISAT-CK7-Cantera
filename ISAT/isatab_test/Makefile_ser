@@ -1,0 +1,24 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Date: Tue,  4 Sep 2012 17:26:14 -0500
+# Modified: Fri Sep 14 17:44:16 UTC 2012 by Steve Lantz
+
+include ../build-files/vars.mk
+
+RNU_PATH = ../rnu_lib
+ISATAB_PATH = ../isatab_ser
+IFLAGS = -I$(RNU_PATH) -I$(ISATAB_PATH)
+LIBS_PATH = $(DESTDIR)/lib
+LDFLAGS = -L$(LIBS_PATH) -lisat7_ser -L${TACC_MKL_LIB} $(MKL_LIST)
+NAME = test_ser
+
+# ------------- OBJECTS --------------------
+
+include SOURCES_ser.mk
+
+OBJS = $(FILES:.f90=.$(OBJ))
+
+# ------------- TARGETS --------------------
+
+all: $(FILES) $(NAME)
+
+include ../build-files/build-targets.mk

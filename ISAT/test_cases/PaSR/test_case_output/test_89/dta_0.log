@@ -1,0 +1,5 @@
+ ci_dpt_dr: initializing dta matrix
+ cidpt_dr_update: attempting to update using         5274  stored zu values
+ ci_dpt_dr: updating PT failed, rank, dpt_info =            0          -2
+ cidpt_dr_update: attempting to update using        12037  stored zu values
+ ci_dpt_dr: updating PT failed, rank, dpt_info =            0          -2

@@ -1,0 +1,5 @@
+&isat_nml
+nml_op   = 2
+stomby   = 100.d0
+etola    = 1.d-4
+/

@@ -1,0 +1,26 @@
+# Author: Varun Hiremath <vh63@cornell.edu>
+# Last modified: Wed, 26 Aug 2009 00:45:22 -0400
+
+$(FILES):
+	$(LN) $(SOURCE_DIR)\$@ .
+
+.f90.obj:
+	$(FC) $(FCFLAGS) $(IFLAGS) /c $<
+
+.f.obj:
+	$(FC) $(FCFLAGS) $(IFLAGS) /c $<
+
+$(LIB_NAME).lib: $(OBJS)
+	$(AR) /out:$@ $(OBJS)
+
+$(NAME): $(OBJS)
+	$(FC) /exe:$@ $(OBJS) $(LINK_OPS) $(LDFLAGS)
+
+$(MPI_OBJ):
+	$(FC) $(FCFLAGS) $(IFLAGS) /c $(MPI_PATH)
+
+debug: clean
+	$(MAKE) BUILD_TYPE=debug
+
+clean::
+	$(RM) $(CREATE_LIBS) $(NAME) $(OBJS) *.mod
